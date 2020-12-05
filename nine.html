@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>test</title>
+
+</head>
+<body>
+  <!-- 首先要存储每个按键所代表的字母
+    根据输入的数字，找出数字所对应的字母
+    循环递归获取拼接后的字母组合 -->
+    <script>
+      
+      function Combine(str) {
+        // 用数组的索引代表每个键盘的字母
+        let map = ['', 1, 'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ']
+      
+              // 输入的数字，转成数组， 输入字符串分割成数组，234 => [2,3,4]
+      const num = str.split('')
+    
+      // 根据 number 映射 map 的值
+      const code = []
+      num.forEach(n => {
+        if (map[n]) {
+          code.push(map[n])
+        }
+      })
+    
+      const merge = (arry) => {
+
+        // 临时变量，用来保存 递归后的结果
+        let comArry = []
+    
+        for (let i = 0; i < arry[0].length; i++) {
+          const a = arry[0][i];
+          for (let j = 0; j < arry[1].length; j++) {
+            const b = arry[1][j];
+            comArry.push(`${a}${b}`)
+          }
+        }
+
+        // 替换数组，把数组前两位替换
+        arry.splice(0, 2, comArry)
+    
+        if(arry.length > 1) {
+          merge(arry)
+          console.log(arry)
+        } else {
+          return comArry
+        }
+        // 返回最后的结果，因为最后只有一个元素
+        return arry[0]
+      }
+      return merge(code)
+    }
+
+    const result = Combine('23')
+    
+        </script>
+</body>
